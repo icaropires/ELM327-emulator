@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo -e "\033[0;33mStoping emulators...\033[0m\n"
+
+echo -e 'Containers IDs:'
+sudo docker stop $(sudo docker ps -aq --filter="ancestor=icaropires/elm327-emulator")
+
+echo -e "\n\033[0;32mAll emulation containers were stopped!\033[0m"
