@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  simulator:
-    container_name: 'simulator'
-    build: .
-    tty: true
-    privileged: true

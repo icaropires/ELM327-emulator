@@ -1,1 +1,8 @@
 README.md
+env
+.env
+venv
+.venv
+**/*.log
+.git*
+**/*.py[co]

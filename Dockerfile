@@ -1,13 +1,12 @@
-FROM frolvlad/alpine-python3
+FROM python:3.7-alpine
 
-RUN mkdir /home/ELM327-emulator
-WORKDIR /home/ELM327-emulator
+LABEL description="ELM327 emulator, fork from lrcama user on github"
 
-ADD elm ./elm/
-ADD elm.yaml .
-ADD obd_dictionary.py .
-ADD requirements.txt .
+WORKDIR /app
+
+COPY . ./
 
 RUN pip install -r requirements.txt
 
-CMD ["/usr/bin/python3", "-m", "elm"]
+ENTRYPOINT ["python"]
+CMD ["-m", "elm", "-b", "out"]
