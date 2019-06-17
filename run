@@ -17,9 +17,11 @@ LAST_PTS_CONNECTED=$(($FIRST_PTS_CONNECTED+$NUMBER_OF_SIMULATORS-1))
 echo -e "\033[0;33mPlease, don't open any terminal until this procedure finish!\033[0m"
 echo -e "\033[0;32mStarting simulators...\033[0m\n"
 
-echo -e 'Containers IDs:'
+echo -e 'Serial slaves:'
 for i in $(seq $FIRST_PTS_CONNECTED $LAST_PTS_CONNECTED); do
-    sudo docker run -d --name "emulator$i" --privileged -v "/dev/pts:/dev/pts" --rm icaropires/elm327-emulator
+    ID="$(sudo docker run -d --name "emulator$i" --privileged -v "/dev/pts:/dev/pts" --rm icaropires/elm327-emulator)"
+    sleep 0.15
+    sudo docker exec $ID head -n1 out
 done
 
-echo -e "\n\033[0;32mFinished! You can access emulators from /dev/pts/$FIRST_PTS_CONNECTED until /dev/pts/$LAST_PTS_CONNECTED\033[0m"
+echo -e "\n\033[0;32mFinished!"
